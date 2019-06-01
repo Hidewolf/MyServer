@@ -3,6 +3,6 @@
 </template>
 <script>
 export default {
-   name: 'gameContainer'
+  name: 'gameContainer'
 }
 </script>

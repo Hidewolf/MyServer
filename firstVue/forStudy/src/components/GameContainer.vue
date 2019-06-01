@@ -1,5 +1,6 @@
 <template>
-    <div>hello my</div>
+    <div>my Vue
+    </div>
 </template>
 <script>
 export default {

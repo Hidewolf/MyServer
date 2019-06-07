@@ -7,6 +7,7 @@ import com.example.myserver.demo.staticClass.RESULT_CONTENT;
 import com.example.myserver.demo.staticClass.VALUE_CONTENT;
 import com.example.myserver.demo.util.sysUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -25,6 +26,7 @@ public class UserLoginController {
 
     //登录
     @RequestMapping("/log")
+    @ResponseBody
     public Map<String, Object> login(HttpServletRequest req) {
         HttpSession session = req.getSession();
         String userName = req.getParameter(PARAMS_KEY.USER_NAME);
@@ -58,6 +60,7 @@ public class UserLoginController {
 
     //注册
     @RequestMapping("/regist")
+    @ResponseBody
     public Map<String, Object> regist(HttpServletRequest req) {
         Map<String, Object> res = new HashMap();
         //获取用户名
@@ -71,7 +74,7 @@ public class UserLoginController {
         //获取密码（md5加密）
         String psw = sysUtil.md5(req.getParameter(PARAMS_KEY.PASS_WORD));
         //存入用户
-        logCheckManager.addUser(userName,psw);
+        logCheckManager.addUser(userName, psw);
         return null;
     }
 

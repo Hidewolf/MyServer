@@ -1,6 +1,7 @@
-package com.example.myserver.demo.controller;
+package com.example.myserver.demo.controller.privateImportant;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/homeManager")
 public class HomeManagerController {
     @RequestMapping("/adj")
+    @ResponseBody
     public String adj(HttpServletRequest req) throws InterruptedException {
         String a = req.getParameter("adjId");
         System.out.println(new Date()+"adj:"+a+"start");
@@ -22,7 +24,6 @@ public class HomeManagerController {
     public String log(HttpServletRequest req) throws InterruptedException {
         String a = req.getParameter("adjId");
         System.out.println(new Date()+"log:"+a+"start");
-        TimeUnit.SECONDS.sleep(10);
         System.out.println(new Date()+"log:"+a+"END");
         return "LOG GET";
     }

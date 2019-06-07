@@ -10,4 +10,14 @@ public class User {
     private String remark;
     private int roleNo;
     private int roleLevel;
+
+    public boolean isEmpty() {
+        if (this.userName.equals("") || this.userName.isEmpty()) {
+            return true;
+        }
+        if (this.status != 1) {
+            return true;
+        }
+        return false;
+    }
 }

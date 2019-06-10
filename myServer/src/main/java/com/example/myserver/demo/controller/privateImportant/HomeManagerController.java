@@ -27,5 +27,4 @@ public class HomeManagerController {
         System.out.println(new Date()+"log:"+a+"END");
         return "LOG GET";
     }
-
 }

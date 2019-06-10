@@ -20,4 +20,20 @@ public class User {
         }
         return false;
     }
+
+    public boolean ifContainRole(int roleId){
+      String roleNoBi = Integer.toBinaryString(this.roleNo);
+      String roleIdBi = Integer.toBinaryString(roleId);
+
+      if(roleIdBi.length()>roleNoBi.length()){
+        return false;
+      }
+
+      if(roleNoBi.substring(roleIdBi.length()-1, roleIdBi.length()).equals("1")){
+        return true;
+      }else{
+        return false;
+      }
+
+    }
 }

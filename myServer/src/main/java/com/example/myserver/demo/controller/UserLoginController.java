@@ -20,7 +20,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/login")
 public class UserLoginController {
-    private static Map<String, Object> USERS = new HashMap();
+    //private static Map<String, Object> USERS = new HashMap();
     @Resource
     LogCheckManager logCheckManager;
 
@@ -48,7 +48,7 @@ public class UserLoginController {
         //通过uuid验证登录状态，防止多处登录
         String uuid = UUID.randomUUID().toString().replace("-", "");
         User user = logCheckManager.getUserInfo(userName);
-        USERS.put(String.valueOf(user.getId()), uuid);
+        //USERS.put(String.valueOf(user.getId()), uuid);
         session.setAttribute(PARAMS_KEY.USER_ID, user.getId());
         session.setAttribute(PARAMS_KEY.USER_INFO, user);
         session.setAttribute(PARAMS_KEY.SESSION_UUID, uuid);
@@ -78,8 +78,5 @@ public class UserLoginController {
         return null;
     }
 
-    //验证登录状态
-    public static boolean checkLogStatus(HttpSession session) {
-        return USERS.get(session.getAttribute("userId")) == session.getAttribute("uuid");
-    }
+    //
 }

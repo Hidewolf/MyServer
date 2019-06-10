@@ -45,7 +45,7 @@ public class UserLoginController {
             res.put(RESULT_CONTENT.ERRER_CODE_KEY, RESULT_CONTENT.NOT_CURRENT_INFO_CODE);
             return res;
         }
-        //通过uuid验证登录状态，防止多处登录
+        //通过uuid验证登录状态，防止多处登录（等集成redis后实现）
         String uuid = UUID.randomUUID().toString().replace("-", "");
         User user = logCheckManager.getUserInfo(userName);
         //USERS.put(String.valueOf(user.getId()), uuid);
@@ -78,5 +78,4 @@ public class UserLoginController {
         return null;
     }
 
-    //
 }

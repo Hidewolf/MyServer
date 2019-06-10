@@ -29,7 +29,7 @@ public class User {
         return false;
       }
 
-      if(roleNoBi.substring(roleIdBi.length()-1, roleIdBi.length()).equals("1")){
+      if(roleNoBi.substring(roleIdBi.length()-1, roleIdBi.length()).equals("1")||roleNoBi.substring(0,1).equals("1")){
         return true;
       }else{
         return false;

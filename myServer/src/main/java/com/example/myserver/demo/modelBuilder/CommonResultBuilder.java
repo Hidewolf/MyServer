@@ -1,13 +1,11 @@
 package com.example.myserver.demo.modelBuilder;
 
-import java.beans.PropertyDescriptor;
-
 import com.example.myserver.demo.model.CommonResult;
+import org.springframework.stereotype.Component;
 
-import org.springframework.beans.BeanUtils;
-
+@Component("resultBuilder")
 public class CommonResultBuilder<T> {
-  enum RES_ENUM {
+  public enum RES_ENUM {
     // 成功
     SUCCESS("200", "success"),
     // 失败
@@ -17,7 +15,9 @@ public class CommonResultBuilder<T> {
     // 信息不正确
     NOT_CURRENT_INFO("502", "not all infomation current"),
     // 内容重复
-    REPEAT_CONTENT("110", "the content is repeat");
+    REPEAT_CONTENT("110", "the content is repeat"),
+    // 没有权限
+    INSUFFICIENT_PRIVILEGES("220", "you have no access to do this");
 
     private String code;
     private String msg;

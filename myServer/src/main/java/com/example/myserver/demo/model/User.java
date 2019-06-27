@@ -22,12 +22,8 @@ public class User {
     }
 
     public boolean ifContainRole(int roleId){
-      String roleNoBi = Integer.toBinaryString(this.roleNo);
       String roleIdBi = Integer.toBinaryString(roleId);
-
-      if(roleIdBi.length()>roleNoBi.length()){
-        return false;
-      }
+      String roleNoBi = String.format("%0" + roleIdBi.length() + "d", Integer.parseInt(Integer.toBinaryString(this.roleNo)));
 
       if(roleNoBi.substring(roleIdBi.length()-1, roleIdBi.length()).equals("1")||roleNoBi.substring(0,1).equals("1")){
         return true;

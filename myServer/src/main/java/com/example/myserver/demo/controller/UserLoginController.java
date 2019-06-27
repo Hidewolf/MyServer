@@ -20,7 +20,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/login")
 public class UserLoginController {
-    //private static Map<String, Object> USERS = new HashMap();
     @Resource
     LogCheckManager logCheckManager;
 

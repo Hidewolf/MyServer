@@ -8,4 +8,5 @@ import com.example.myserver.demo.model.User;
 public interface PersonalCloudDriverManager{
   List<CloudDriverFile> getFileList(User user,String rootRouter);
   List<CloudDriverFile> getFileList(User user);
+  String createDir(String dirName);
 }

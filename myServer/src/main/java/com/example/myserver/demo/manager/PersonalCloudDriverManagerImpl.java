@@ -34,11 +34,20 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
   @Override
   public List<CloudDriverFile> getFileList(User user) {
     String rootRouter = this.getUserDir(user);
+    if(rootRouter == null || rootRouter.isEmpty()){
+      rootRouter = this.createDir(user.getUserName()+"defaultDir");
+    }
     return this.getFileList(user, rootRouter);
   }
 
   private String getUserDir(User user) {
     return null;
+  }
+
+  @Override
+  public String createDir(String dirName) {
+    
+    return dirName;
   }
 
 }

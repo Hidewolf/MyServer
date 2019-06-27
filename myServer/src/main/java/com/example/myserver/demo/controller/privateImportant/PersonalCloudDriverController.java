@@ -35,6 +35,24 @@ public class PersonalCloudDriverController {
     if (!user.ifContainRole(2)) {
       return resultBuilder.Error(RES_ENUM.INSUFFICIENT_PRIVILEGES);
     }
+    String rootRouter = req.getParameter("rootRouter");
+    CommonResult<CloudDriverFile> res;
+    if(rootRouter==null || rootRouter.isEmpty()){
+      res = resultBuilder.Success(personalCloudDriverManager.getFileList(user));
+    }else{
+      res = resultBuilder.Success(personalCloudDriverManager.getFileList(user, rootRouter));
+    }
+    return res;
+  }
+
+  @RequestMapping("/getFile")
+  @ResponseBody
+  public CommonResult getFile(HttpServletRequest req) {
+    HttpSession session = req.getSession();
+    User user = (User) session.getAttribute(PARAMS_KEY.USER_INFO);
+    if (!user.ifContainRole(2)) {
+      return resultBuilder.Error(RES_ENUM.INSUFFICIENT_PRIVILEGES);
+    }
     CommonResult<CloudDriverFile> res = resultBuilder.Success();
     return res;
   }

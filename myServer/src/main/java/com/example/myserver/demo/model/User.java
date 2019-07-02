@@ -10,6 +10,8 @@ public class User {
     private String remark;
     private int roleNo;
     private int roleLevel;
+    /*特殊属性，用于暂存用户绑定的信息*/
+    private Object info;
 
     public boolean isEmpty() {
         if (this.userName.equals("") || this.userName.isEmpty()) {

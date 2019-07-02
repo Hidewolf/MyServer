@@ -10,4 +10,11 @@ public class CommonResult<T> {
 
   private T res;
 
+  public boolean isSuccess() {
+    if (this.resultCode.equals("200")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

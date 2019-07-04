@@ -1,8 +1,13 @@
 package com.example.myserver.demo.model;
 
 import java.io.File;
+import java.io.Serializable;
 
-public class CloudDriverFile {
+import lombok.Data;
+
+@Data
+public class CloudDriverFile{
+  
   private String fileName;
   private String owner;
   private String router;

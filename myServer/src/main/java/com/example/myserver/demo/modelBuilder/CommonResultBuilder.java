@@ -1,9 +1,7 @@
 package com.example.myserver.demo.modelBuilder;
 
 import com.example.myserver.demo.model.CommonResult;
-import org.springframework.stereotype.Component;
 
-@Component("resultBuilder")
 public class CommonResultBuilder<T> {
   public enum RES_ENUM {
     // 成功

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.example.myserver.demo.mapper.PersonalCloudDriverMapper;
 import com.example.myserver.demo.model.CloudDriverFile;
 import com.example.myserver.demo.model.CommonResult;
 import com.example.myserver.demo.model.User;
@@ -19,13 +18,10 @@ import org.springframework.stereotype.Service;
 @Service("personalCloudDriverManager")
 public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManager {
 
-  final private String driverRouter = "D:\\Ts\\private";
+  final private String driverRouter = "D:\\Ts\\private\\";
 
   @Resource(name = "personalCloudDriverService")
   PersonalCloudDriverService personalCloudDriverService;
-
-  @Resource(name = "resultBuilder")
-  CommonResultBuilder resultBuilder;
 
   @Override
   public List<CloudDriverFile> getFileList(User user, String rootRouter) {
@@ -44,7 +40,14 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
 
   @Override
   public List<CloudDriverFile> getFileList(User user) {
-    String rootRouter = this.getUserDir(user).getInfo().toString();
+    User cfgInfo = this.getUserDir(user);
+    String rootRouter;
+    if(cfgInfo == null){
+      rootRouter = this.createRootDir(user, user.getUserName() + "defaultDir");
+    }else{
+      rootRouter = cfgInfo.getInfo().toString();
+    }
+    
     if (rootRouter == null || rootRouter.isEmpty()) {
       rootRouter = this.createRootDir(user, user.getUserName() + "defaultDir");
     }
@@ -61,7 +64,7 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
     User cfgInfo = this.getUserDir(user);
     if (cfgInfo == null) {
       personalCloudDriverService.insertCfgInfo(user, dirName);
-      CommonResult<String> res = this.createDir(user, "", dirName);
+      CommonResult res = this.createDir(user, "", dirName);
       if (res.isSuccess()) {
         return dirName;
       } else {
@@ -75,11 +78,18 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
 
   @Override
   public CommonResult<String> createDir(User user, String rootDirName, String dirName) {
+    CommonResultBuilder<String> resultBuilder = new CommonResultBuilder();
     if (rootDirName != null && !rootDirName.isEmpty()) {
       User cfgInfo = this.getUserDir(user);
       if (rootDirName.indexOf("\\" + cfgInfo.getInfo().toString() + "\\") < 0) {
         return resultBuilder.Error(RES_ENUM.NOT_CURRENT_INFO);
       }
+    }
+
+    if(dirName ==null || dirName.isEmpty()){
+      return resultBuilder.Error(RES_ENUM.LOST_NECESSARY_IMFORMATION);
+    }else if(dirName.indexOf(rootDirName)<0){
+      dirName = rootDirName+dirName;
     }
 
     File dir = new File(driverRouter + dirName);

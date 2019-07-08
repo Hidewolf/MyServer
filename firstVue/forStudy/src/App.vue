@@ -1,19 +1,24 @@
 <template>
-  <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
-      <span>玩家数量：</span><input v-model="playerNumber" id="playerNumber"/>
-      <span>每名玩家角色数：</span><input id="chessPerPlayer" :value="chessPerPlayer" />
-    <router-view/>
+  <div>
+    <head-part>
+    </head-part>
+    <main-part>
+    </main-part>
+    <foot-part>
+    </foot-part>
   </div>
 </template>
 
 <script>
+import headPart from '@/components/head.vue'
+import footPart from '@/components/foot.vue'
+import mainPart from '@/components/logIn.vue'
+
 export default {
   name: 'App1',
+  components: { headPart, footPart, mainPart },
   data () {
     return {
-      playerNumber: 4,
-      chessPerPlayer: 3
     }
   }
 }

@@ -15,6 +15,7 @@
           placeholder="请输入密码"
         /></span></div>
     <div><button v-on:click="logIn">登陆</button></div>
+    <div><button v-on:click="test">测试</button></div>
   </div>
 </template>
 <script>
@@ -26,7 +27,11 @@ export default {
   methods: {
     logIn: function () {
       this.$axios.post('/login/log', this.logInfo).then(successResponse => {
-        console.log(successResponse.data)
+        console.log(successResponse.data);
+      })
+    },
+    test: function(){
+      this.$axios.post('/privateCloudDriver/getFileList').then(successResponse => {
       })
     }
   }

@@ -15,7 +15,9 @@ public class CommonResultBuilder<T> {
     // 内容重复
     REPEAT_CONTENT("110", "the content is repeat"),
     // 没有权限
-    INSUFFICIENT_PRIVILEGES("220", "you have no access to do this");
+    INSUFFICIENT_PRIVILEGES("220", "you have no access to do this"),
+    // 没有登录
+    NO_LOG("250", "you haven't log");
 
     private String code;
     private String msg;

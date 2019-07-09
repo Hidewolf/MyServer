@@ -2,23 +2,29 @@
   <div>
     <head-part>
     </head-part>
-    <main-part>
-    </main-part>
+    <router-view />
     <foot-part>
     </foot-part>
+
+    <div><button v-on:click="test">测试</button></div>
   </div>
 </template>
 
 <script>
 import headPart from '@/components/head.vue'
 import footPart from '@/components/foot.vue'
-import mainPart from '@/components/logIn.vue'
 
 export default {
   name: 'App1',
-  components: { headPart, footPart, mainPart },
+  components: { headPart, footPart },
   data () {
     return {
+    }
+  },
+  methods: {
+    test: function () {
+      this.$axios.post('/privateCloudDriver/getFileList').then(successResponse => {
+      })
     }
   }
 }
@@ -26,7 +32,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

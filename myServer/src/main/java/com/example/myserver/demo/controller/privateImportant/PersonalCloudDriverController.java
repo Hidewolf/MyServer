@@ -14,11 +14,13 @@ import com.example.myserver.demo.modelBuilder.CommonResultBuilder;
 import com.example.myserver.demo.modelBuilder.CommonResultBuilder.RES_ENUM;
 import com.example.myserver.demo.staticClass.PARAMS_KEY;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/privateCloudDriver")
 public class PersonalCloudDriverController {
 

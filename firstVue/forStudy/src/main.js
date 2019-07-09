@@ -4,9 +4,19 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+//参数序列化
+var qs = require('qs');
+
 // 引用axios，并设置基础URL为后端服务api地址
 var axios = require('axios')
-axios.defaults.baseURL = 'http://localhost:8080/wolfServer'
+axios.defaults.baseURL = 'http://localhost:8080/wolfServer';
+axios.interceptors.request.use(
+  function(config){
+    console.log(config);
+    config.data = qs.stringify(config.data);
+    return config;
+  }
+);
 
 // 将API方法绑定到全局
 Vue.prototype.$axios = axios

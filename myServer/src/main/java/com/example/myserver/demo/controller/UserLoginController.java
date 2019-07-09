@@ -8,14 +8,19 @@ import com.example.myserver.demo.staticClass.VALUE_CONTENT;
 import com.example.myserver.demo.util.sysUtil;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.sf.json.JSONObject;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -28,20 +33,20 @@ public class UserLoginController {
   LogCheckManager logCheckManager;
 
   // 登录
-  @RequestMapping("/log")
+  @PostMapping("/log")
   @ResponseBody
-  public Map<String, Object> login(HttpServletRequest req, @RequestBody Map<String, Object> map) {
+  public Map<String, Object> login(HttpServletRequest req) {
     HttpSession session = req.getSession();
     Map<String, Object> res = new HashMap();
-    String userName = map.get(PARAMS_KEY.USER_NAME).toString();
-    if (userName == null || userName.equals("") || map.get(PARAMS_KEY.PASS_WORD) == null
-        || map.get(PARAMS_KEY.PASS_WORD).toString().equals("")) {
+    String userName = req.getParameter(PARAMS_KEY.USER_NAME);
+    if (userName == null || userName.equals("") || req.getParameter(PARAMS_KEY.PASS_WORD) == null
+        || req.getParameter(PARAMS_KEY.PASS_WORD).toString().equals("")) {
       res.put(RESULT_CONTENT.MESSAGE_KEY, RESULT_CONTENT.LOST_NECESSARY_IMFORMATION_MSG);
       res.put(RESULT_CONTENT.ERRER_CODE_KEY, RESULT_CONTENT.LOST_NECESSARY_IMFORMATION_CODE);
       return res;
     }
     // md5加密
-    String psw = sysUtil.md5(map.get(PARAMS_KEY.PASS_WORD).toString());
+    String psw = sysUtil.md5(req.getParameter(PARAMS_KEY.PASS_WORD).toString());
     // 验证密码
     if (!logCheckManager.checkLog(userName, psw)) {
       res.put(RESULT_CONTENT.MESSAGE_KEY, RESULT_CONTENT.NOT_CURRENT_INFO_MSG);

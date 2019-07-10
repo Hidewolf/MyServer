@@ -5,7 +5,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 //创建仓库实例
-const store = new Vuex.store({
+const store = new Vuex.Store({
   state: {
     userInfo: {}
   },

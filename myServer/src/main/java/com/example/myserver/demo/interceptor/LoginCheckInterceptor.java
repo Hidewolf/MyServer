@@ -29,6 +29,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
       }
 
+      // 重定向到登陆界面
       PrintWriter writer = null;
 
       writer = response.getWriter();
@@ -36,8 +37,6 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
       if (writer != null)
         writer.close();
 
-      // 重定向到登陆界面或首页
-      response.sendRedirect("/login");
       return false;
     }
     return true;

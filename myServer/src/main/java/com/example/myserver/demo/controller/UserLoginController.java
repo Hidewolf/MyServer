@@ -1,7 +1,10 @@
 package com.example.myserver.demo.controller;
 
 import com.example.myserver.demo.manager.LogCheckManager;
+import com.example.myserver.demo.model.CommonResult;
 import com.example.myserver.demo.model.User;
+import com.example.myserver.demo.modelBuilder.CommonResultBuilder;
+import com.example.myserver.demo.modelBuilder.CommonResultBuilder.RES_ENUM;
 import com.example.myserver.demo.staticClass.PARAMS_KEY;
 import com.example.myserver.demo.staticClass.RESULT_CONTENT;
 import com.example.myserver.demo.staticClass.VALUE_CONTENT;
@@ -34,23 +37,19 @@ public class UserLoginController {
   // 登录
   @PostMapping("/log")
   @ResponseBody
-  public Map<String, Object> login(HttpServletRequest req) {
+  public CommonResult<User> login(HttpServletRequest req) {
     HttpSession session = req.getSession();
-    Map<String, Object> res = new HashMap();
+    CommonResultBuilder<User> resultBuilder = new CommonResultBuilder<User>();
     String userName = req.getParameter(PARAMS_KEY.USER_NAME);
     if (userName == null || userName.equals("") || req.getParameter(PARAMS_KEY.PASS_WORD) == null
         || req.getParameter(PARAMS_KEY.PASS_WORD).toString().equals("")) {
-      res.put(RESULT_CONTENT.MESSAGE_KEY, RESULT_CONTENT.LOST_NECESSARY_IMFORMATION_MSG);
-      res.put(RESULT_CONTENT.ERRER_CODE_KEY, RESULT_CONTENT.LOST_NECESSARY_IMFORMATION_CODE);
-      return res;
+      return resultBuilder.Error(RES_ENUM.LOST_NECESSARY_IMFORMATION);
     }
     // md5加密
     String psw = sysUtil.md5(req.getParameter(PARAMS_KEY.PASS_WORD).toString());
     // 验证密码
     if (!logCheckManager.checkLog(userName, psw)) {
-      res.put(RESULT_CONTENT.MESSAGE_KEY, RESULT_CONTENT.NOT_CURRENT_INFO_MSG);
-      res.put(RESULT_CONTENT.ERRER_CODE_KEY, RESULT_CONTENT.NOT_CURRENT_INFO_CODE);
-      return res;
+      return resultBuilder.Error(RES_ENUM.NOT_CURRENT_INFO);
     }
     // 通过uuid验证登录状态，防止多处登录（等集成redis后实现）
     String uuid = UUID.randomUUID().toString().replace("-", "");
@@ -60,9 +59,7 @@ public class UserLoginController {
     session.setAttribute(PARAMS_KEY.USER_INFO, user);
     session.setAttribute(PARAMS_KEY.SESSION_UUID, uuid);
     session.setAttribute(PARAMS_KEY.LOG_TYPE, VALUE_CONTENT.HOME_MANAGER_USER);
-    res.put(RESULT_CONTENT.MESSAGE_KEY, RESULT_CONTENT.SUCCESS_MSG);
-    res.put(RESULT_CONTENT.ERRER_CODE_KEY, RESULT_CONTENT.SUCCESS_CODE);
-    return res;
+    return resultBuilder.Success(user);
   }
 
   // 注册

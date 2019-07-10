@@ -10,12 +10,14 @@ export default new Router({
     {
       path: '/',
       name: 'HelloWorld',
-      component: HelloWorld
+      component: HelloWorld,
+      meta: { requireAuth: true }
     },
     {
       path: '/login',
       name: 'logIn',
-      component: logAssets
+      component: logAssets,
+      meta: { requireAuth: false }
     }
   ]
 })

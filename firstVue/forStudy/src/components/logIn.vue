@@ -27,10 +27,16 @@ export default {
   methods: {
     logIn: function () {
       this.$axios.post('/login/log', this.logInfo).then(successResponse => {
-        console.log(successResponse.data);
+        if (successResponse.data.resultCode == '200') {
+          this.$store.commit("logIn", successResponse.data.res);
+          var path = this.$route.query.redirect
+          this.$router.replace({ path: path === '/' || path === undefined ? '/' : path })
+        } else {
+
+        }
       })
     },
-    test: function(){
+    test: function () {
       this.$axios.post('/privateCloudDriver/getFileList').then(successResponse => {
       })
     }

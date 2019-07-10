@@ -17,7 +17,9 @@ public class CommonResultBuilder<T> {
     // 没有权限
     INSUFFICIENT_PRIVILEGES("220", "you have no access to do this"),
     // 没有登录
-    NO_LOG("250", "you haven't log");
+    NO_LOG("250", "you haven't log"),
+    // 重定向到指定路由
+    REDIRECT("233", "redirect to path");
 
     private String code;
     private String msg;

@@ -1,31 +1,34 @@
 <template>
-  <div>
-    <head-part>
-    </head-part>
-    <router-view />
-    <foot-part>
-    </foot-part>
-
-    <div><button v-on:click="test">测试</button></div>
-  </div>
+  <a-layout style="min-height: 100vh">
+    <a-layout-sider collapsible>
+      <menuAsset />
+    </a-layout-sider>
+    <a-layout>
+      <a-layout-header></a-layout-header>
+      <a-layout-content>
+        <router-view />
+          <logAssets />
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
 </template>
 
 <script>
-import headPart from '@/components/head.vue'
+import menuAsset from '@/components/common_assets/menu.vue'
 import footPart from '@/components/foot.vue'
+import logAssets from '@/components/common_assets/logIn.vue'
 
 export default {
   name: 'App1',
-  components: { headPart, footPart },
+  components: { menuAsset, footPart, logAssets },
   data () {
     return {
+      loginShow: false
     }
   },
+  created: function () {
+  },
   methods: {
-    test: function () {
-      this.$axios.post('/privateCloudDriver/getFileList').then(successResponse => {
-      })
-    }
   }
 }
 </script>

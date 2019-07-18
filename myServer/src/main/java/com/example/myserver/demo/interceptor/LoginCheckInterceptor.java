@@ -30,9 +30,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
       }
 
       // 重定向到登陆界面
-      PrintWriter writer = null;
+      PrintWriter writer = response.getWriter();
 
-      writer = response.getWriter();
       writer.print(JSONObject.toJSONString(resultBuilder.Error(RES_ENUM.NO_LOG)));
       if (writer != null)
         writer.close();

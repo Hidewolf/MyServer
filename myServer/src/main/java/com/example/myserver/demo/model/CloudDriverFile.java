@@ -23,6 +23,10 @@ public class CloudDriverFile{
     this.type = file.isFile() ? "file" : "dir";
   }
 
+  public void removeSecret(){
+    this.router = "";
+  }
+
   @Override
   public String toString() {
     return "fileName:" + this.fileName + "-router:" + this.router + "-type:" + this.type + "-index:" + this.index;

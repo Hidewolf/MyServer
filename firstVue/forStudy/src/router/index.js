@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import homePage from '@/components/common_assets/home'
 import headAssets from '@/components/head'
+import fileList from '@/components/cloudDriver/fileList'
 
 Vue.use(Router)
 
@@ -17,6 +18,12 @@ export default new Router({
       path: '/',
       name: 'test',
       component: headAssets,
+      meta: { requireAuth: true }
+    },
+    {
+      path: '/fileList',
+      name: 'fileList',
+      component: fileList,
       meta: { requireAuth: true }
     }
   ]

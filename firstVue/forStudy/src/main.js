@@ -16,6 +16,7 @@ var qs = require('qs')
 /* 引用axios，并设置基础URL为后端服务api地址*/
 var axios = require('axios')
 axios.defaults.baseURL = 'http://localhost:8080/wolfServer'
+axios.defaults.withCredentials = true
 
 //拦截器序列化请求的参数
 axios.interceptors.request.use(function(config) {
@@ -25,7 +26,7 @@ axios.interceptors.request.use(function(config) {
 //拦截器判断登录状态和处理服务端的重定向要求
 axios.interceptors.response.use(function(response) {
   if (response.data.resultCode == '250') {
-    store.commit('clear');
+    store.dispatch('clear')
     router.replace({
       path: '/home',
       query: { redirect: router.currentRoute.fullPath }

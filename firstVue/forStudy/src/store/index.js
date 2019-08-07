@@ -41,7 +41,7 @@ const store = new Vuex.Store({
   actions: {
     //登陆
     logIn(context, userInfo) {
-      context.commit('addUser')
+      context.commit('addUser',userInfo)
       sessionStorage.setItem('userInfo', JSON.stringify(userInfo))
     },
     //清除登录状态

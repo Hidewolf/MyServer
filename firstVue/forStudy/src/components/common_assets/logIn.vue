@@ -3,8 +3,18 @@
     v-model="isVisible"
     title="登陆"
     okText="登陆"
-    @ok="logIn"
+    :maskClosable=false
+    :closable=false
   >
+    <template slot="footer">
+      <a-button
+        key="submit"
+        type="primary"
+        @click="logIn"
+      >
+        登陆
+      </a-button>
+    </template>
     <a-layout>
       <a-layout-content class="main_content">
         用户名：

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.example.myserver.demo.model.CloudDriverFile;
 import com.example.myserver.demo.model.CommonResult;
@@ -42,12 +44,12 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
   public List<CloudDriverFile> getFileList(User user) {
     User cfgInfo = this.getUserDir(user);
     String rootRouter;
-    if(cfgInfo == null){
+    if (cfgInfo == null) {
       rootRouter = this.createRootDir(user, user.getUserName() + "defaultDir");
-    }else{
+    } else {
       rootRouter = cfgInfo.getInfo().toString();
     }
-    
+
     if (rootRouter == null || rootRouter.isEmpty()) {
       rootRouter = this.createRootDir(user, user.getUserName() + "defaultDir");
     }
@@ -86,10 +88,10 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
       }
     }
 
-    if(dirName ==null || dirName.isEmpty()){
+    if (dirName == null || dirName.isEmpty()) {
       return resultBuilder.Error(RES_ENUM.LOST_NECESSARY_IMFORMATION);
-    }else if(dirName.indexOf(rootDirName)<0){
-      dirName = rootDirName+dirName;
+    } else if (dirName.indexOf(rootDirName) < 0) {
+      dirName = rootDirName + dirName;
     }
 
     File dir = new File(driverRouter + dirName);
@@ -99,6 +101,30 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
       return resultBuilder.Success(dirName);
     } else {
       return resultBuilder.Error(RES_ENUM.NOT_CURRENT_INFO, "Path incompleteness");
+    }
+  }
+
+  @Override
+  public void secretFileInfo(HttpSession session, List<CloudDriverFile> fileList) {
+    session.setAttribute("fileList", fileList);
+    for (int i = 0; i < fileList.size(); i++) {
+      fileList.get(i).removeSecret();
+    }
+  }
+
+  @Override
+  public String getFileSecret(HttpSession session, HttpServletRequest req) {
+    String rootRouter = req.getParameter("rootRouter");
+    List<CloudDriverFile> fileList = (List<CloudDriverFile>) session.getAttribute("fileList");
+    if(rootRouter!=null && fileList!=null &&fileList.size()>0){
+      for(int i = 0;i<fileList.size();i++){
+        if(fileList.get(i).getIndex() == rootRouter){
+          return fileList.get(i).getRouter();
+        }
+      }
+      return null;
+    }else{
+      return null;
     }
   }
 

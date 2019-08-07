@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:8040",allowCredentials="true")
 @RequestMapping("/login")
 public class UserLoginController {
   @Resource

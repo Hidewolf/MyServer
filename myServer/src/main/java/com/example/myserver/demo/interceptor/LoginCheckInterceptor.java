@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 public class LoginCheckInterceptor implements HandlerInterceptor {
   @Override
-  @CrossOrigin
+  @CrossOrigin(origins="http://localhost:8040",allowCredentials="true")
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     HttpSession session = request.getSession();
     User user = (User) session.getAttribute(PARAMS_KEY.USER_INFO);
@@ -27,6 +27,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
       if (request.getHeader("Origin") != null) {
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Credentials", "true");
       }
 
       // 重定向到登陆界面

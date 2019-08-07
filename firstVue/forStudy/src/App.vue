@@ -1,13 +1,13 @@
 <template>
   <a-layout style="min-height: 100vh">
-    <a-layout-sider collapsible>
-      <menuAsset />
-    </a-layout-sider>
+    <a-layout-header></a-layout-header>
     <a-layout>
-      <a-layout-header></a-layout-header>
+      <a-layout-sider collapsible>
+        <menuAsset />
+      </a-layout-sider>
       <a-layout-content>
         <router-view />
-          <logAssets />
+        <logAssets />
       </a-layout-content>
     </a-layout>
   </a-layout>

@@ -1,5 +1,6 @@
 package com.example.myserver.demo.controller.privateImportant;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8040", allowCredentials = "true")
 @RequestMapping("/privateCloudDriver")
 public class PersonalCloudDriverController {
 
@@ -33,17 +34,29 @@ public class PersonalCloudDriverController {
     CommonResultBuilder<List<CloudDriverFile>> resultBuilder = new CommonResultBuilder();
 
     HttpSession session = req.getSession();
+    // 获取session中用户信息
     User user = (User) session.getAttribute(PARAMS_KEY.USER_INFO);
     if (!user.ifContainRole(2)) {
       return resultBuilder.Error(RES_ENUM.INSUFFICIENT_PRIVILEGES);
     }
-    String rootRouter = req.getParameter("rootRouter");
+    // 获取所查询的文件列表所在的文件夹
+    String rootRouter = personalCloudDriverManager.getFileSecret(session, req);
+
     CommonResult<List<CloudDriverFile>> res;
-    if(rootRouter==null || rootRouter.isEmpty()){
-      res = resultBuilder.Success(personalCloudDriverManager.getFileList(user));
-    }else{
-      res = resultBuilder.Success(personalCloudDriverManager.getFileList(user, rootRouter));
+    List<CloudDriverFile> fileList = new ArrayList<>();
+
+    // 如果没有文件夹则从用户根目录取
+    if (rootRouter == null || rootRouter.isEmpty()) {
+      fileList = personalCloudDriverManager.getFileList(user);
+    } else {
+      fileList = personalCloudDriverManager.getFileList(user, rootRouter);
     }
+    if (fileList.size() > 0) {
+      // 对文件目录进行脱敏：把真实路径存入session，浏览器只获取id编号，根据id编号从session中获取真实路径
+      personalCloudDriverManager.secretFileInfo(session, fileList);
+    }
+
+    res = resultBuilder.Success(fileList);
     return res;
   }
 

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import homePage from '@/components/common_assets/home'
 import headAssets from '@/components/head'
-import fileList from '@/components/cloudDriver/fileList'
+import fileList from '@/components/cloudDriver/cloudDriverView'
 
 Vue.use(Router)
 

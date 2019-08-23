@@ -1,29 +1,27 @@
 <template>
-  <a-list :dataSource="filesList">
-    <a-list-item slot="renderItem" slot-scope="item, index">
-      {{index}}
-      <div>名称：{{item.fileName}}</div>
-      <div>类型：{{item.type}}</div>
-    </a-list-item>
-  </a-list>
+
+  <a-table
+    :columns="columns"
+    :dataSource="filesList"
+  >
+    <span>checkBox</span>
+    <span>{{type}}</span>
+    <span>{{fileName}}</span>
+    <span>size</span>
+    <span>date</span>
+    <span>操作</span>
+  </a-table>
 </template>
 <script>
 export default {
   name: 'fileList',
-  data () { return { filesList: [] } },
-  created () {
-    this.searchFiles();
-  },
-  methods: {
-    searchFiles () {
-      this.$axios.post('/privateCloudDriver/getFileList').then(successResponse => {
-        var res = successResponse.data;
-        if (res.resultCode == '200') {
-          this.filesList = successResponse.data.res
-        }
-      });
+  props: ['filesList'],
+  data () {
+    return {
+      columns: [
+        { title: '选择' }, { title: '类型', dataIndex: 'type' }, { title: '文件名', dataIndex: 'fileName' }, { title: '大小' }, { title: '修改时间' }, { title: '操作' }
+      ]
     }
-  },
+  }
 }
 </script>
-

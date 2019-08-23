@@ -10,6 +10,8 @@ import 'ant-design-vue/dist/antd.css'
 //蚂蚁金服
 Vue.use(Antd)
 
+var env = 'test'
+
 //参数序列化
 var qs = require('qs')
 
@@ -52,7 +54,7 @@ Vue.config.productionTip = false
 
 //校验登陆状态
 router.beforeEach((to, from, next) => {
-  if (to.meta.requireAuth) {
+  if (to.meta.requireAuth && env == 'pro') {
     if (store.getters.checkIsLog) {
       next()
     } else {

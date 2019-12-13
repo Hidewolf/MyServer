@@ -17,6 +17,7 @@ export default {
     //获取目录信息
     this.menuList.homePage={menuName:'首页',router:'/home',iconType:'home',menuKey:'homePage'};
     this.menuList.cloudDriver={menuName:'云盘',router:'/fileList',iconType:'cloud',menuKey:'cloudDriver'};
+    this.menuList.charOnline={menuName:'聊天室',router:'/socketTest',iconType:'message',menuKey:'chatRoom'};
   },
   methods:{
   }

@@ -38,6 +38,7 @@
           type="password"
           placeholder="请输入密码"
           v-model="logInfo.psw"
+          v-on:keyup.enter="logIn"
         >
           <a-icon
             slot="prefix"

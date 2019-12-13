@@ -17,7 +17,7 @@ var qs = require('qs')
 
 /* 引用axios，并设置基础URL为后端服务api地址*/
 var axios = require('axios')
-axios.defaults.baseURL = 'http://localhost:8080/wolfServer'
+axios.defaults.baseURL = 'http://192.168.7.194:8080/wolfServer'
 axios.defaults.withCredentials = true
 
 //拦截器序列化请求的参数

@@ -10,7 +10,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/wolfServer',
     proxyTable: {'/wolfServer': {
-      target: 'http://127.0.0.1:8080',
+      target: 'http://192.168.7.194:8080',
       changeOrigin: true,
       pathRewrite: {
           '^/wolfServer': ''
@@ -18,7 +18,7 @@ module.exports = {
     }},
 
     // Various Dev Server settings
-    host: '127.0.0.1', // can be overwritten by process.env.HOST
+    host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 8040, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

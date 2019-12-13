@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import homePage from '@/components/common_assets/home'
 import headAssets from '@/components/head'
 import fileList from '@/components/cloudDriver/cloudDriverView'
+import socketTest from '@/components/practiseForNewTec/socketTest'
 
 Vue.use(Router)
 
@@ -24,6 +25,12 @@ export default new Router({
       path: '/fileList',
       name: 'fileList',
       component: fileList,
+      meta: { requireAuth: true }
+    },
+    {
+      path: '/socketTest',
+      name: 'socketTest',
+      component: socketTest,
       meta: { requireAuth: true }
     }
   ]

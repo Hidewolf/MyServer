@@ -63,6 +63,12 @@
       <scope>provided</scope>
     </dependency>
 
+    <!--webSocket-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-websocket</artifactId>
+      <version>2.1.8.RELEASE</version>
+    </dependency>
 
     <!-- jsonobject-->
     <dependency>

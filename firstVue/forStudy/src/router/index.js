@@ -4,6 +4,7 @@ import homePage from '@/components/common_assets/home'
 import headAssets from '@/components/head'
 import fileList from '@/components/cloudDriver/cloudDriverView'
 import socketTest from '@/components/practiseForNewTec/socketTest'
+import indianTreasures from '@/components/indianTreasures/mainIndex'
 
 Vue.use(Router)
 
@@ -31,6 +32,12 @@ export default new Router({
       path: '/socketTest',
       name: 'socketTest',
       component: socketTest,
+      meta: { requireAuth: true }
+    },
+    {
+      path: '/indianTreasures',
+      name: 'indianTreasures',
+      component: indianTreasures,
       meta: { requireAuth: true }
     }
   ]

@@ -64,7 +64,7 @@ public class UserLoginController {
   @RequestMapping("/regist")
   @ResponseBody
   public Map<String, Object> regist(HttpServletRequest req) {
-    Map<String, Object> res = new HashMap();
+    Map<String, Object> res = new HashMap<String, Object>();
     // 获取用户名
     String userName = req.getParameter(PARAMS_KEY.USER_NAME);
     // 验证用户名是否重复

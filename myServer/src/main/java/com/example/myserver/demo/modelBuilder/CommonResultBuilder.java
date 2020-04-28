@@ -35,7 +35,7 @@ public class CommonResultBuilder<T> {
   }
 
   public CommonResult<T> Success(T res) {
-    CommonResult<T> commonResult = new CommonResult();
+    CommonResult<T> commonResult = new CommonResult<T>();
     commonResult.setResultCode(RES_ENUM.SUCCESS.code);
     commonResult.setResultMsg(RES_ENUM.SUCCESS.msg);
     commonResult.setRes(res);
@@ -51,7 +51,7 @@ public class CommonResultBuilder<T> {
   }
 
   public CommonResult<T> Error(RES_ENUM errorType, String errInfo) {
-    CommonResult<T> commonResult = new CommonResult();
+    CommonResult<T> commonResult = new CommonResult<T>();
     commonResult.setResultCode(errorType.code);
     commonResult.setResultMsg(errorType.msg);
     commonResult.setErrInfo(errInfo);

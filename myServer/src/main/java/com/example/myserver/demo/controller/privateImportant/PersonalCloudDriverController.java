@@ -31,7 +31,7 @@ public class PersonalCloudDriverController {
   @RequestMapping("/getFileList")
   @ResponseBody
   public CommonResult<List<CloudDriverFile>> getFileList(HttpServletRequest req) {
-    CommonResultBuilder<List<CloudDriverFile>> resultBuilder = new CommonResultBuilder();
+    CommonResultBuilder<List<CloudDriverFile>> resultBuilder = new CommonResultBuilder<List<CloudDriverFile>>();
 
     HttpSession session = req.getSession();
     // 获取session中用户信息
@@ -63,13 +63,13 @@ public class PersonalCloudDriverController {
   @RequestMapping("/getFile")
   @ResponseBody
   public CommonResult<List<CloudDriverFile>> getFile(HttpServletRequest req) {
-    CommonResultBuilder<List<CloudDriverFile>> resultBuilder = new CommonResultBuilder();
+    CommonResultBuilder<List<CloudDriverFile>> resultBuilder = new CommonResultBuilder<List<CloudDriverFile>>();
     HttpSession session = req.getSession();
     User user = (User) session.getAttribute(PARAMS_KEY.USER_INFO);
     if (!user.ifContainRole(2)) {
       return resultBuilder.Error(RES_ENUM.INSUFFICIENT_PRIVILEGES);
     }
-    CommonResult res = resultBuilder.Success();
+    CommonResult<List<CloudDriverFile>> res = resultBuilder.Success();
     return res;
   }
 }

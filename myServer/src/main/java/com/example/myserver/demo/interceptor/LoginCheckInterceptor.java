@@ -23,7 +23,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
     User user = (User) session.getAttribute(PARAMS_KEY.USER_INFO);
     if (user == null || user.isEmpty()) {
 
-      CommonResultBuilder resultBuilder = new CommonResultBuilder<>();
+      CommonResultBuilder<String> resultBuilder = new CommonResultBuilder<String>();
 
       if (request.getHeader("Origin") != null) {
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));

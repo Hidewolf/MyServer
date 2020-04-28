@@ -7,14 +7,19 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
-import javax.websocket.server.ServerEndpoint;
 import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
 public class webAppConfig implements WebMvcConfigurer {
 
-    private final List<String> privateResponse = new ArrayList<String>() {{
+    private final List<String> privateResponse = new ArrayList<String>() {
+        /**
+        * paths which need intercept
+        */
+        private static final long serialVersionUID = 1L;
+
+        {
         add("/homeManager/**");
         add("/privateCloudDriver/**");
     }};

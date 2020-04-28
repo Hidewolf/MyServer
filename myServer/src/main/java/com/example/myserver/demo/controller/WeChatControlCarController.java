@@ -16,7 +16,7 @@ public class WeChatControlCarController {
     @RequestMapping("/giveTheOrder")
     @ResponseBody
     public Map<String,Object> giveTheOrder(HttpServletRequest req){
-        Map<String,Object> res = new HashMap();
+        Map<String,Object> res = new HashMap<String,Object>();
         res.put("msg","Hello Spring Boot");
         return res;
     }

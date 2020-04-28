@@ -12,12 +12,10 @@ import com.example.myserver.demo.util.sysUtil;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.sf.json.JSONObject;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -66,7 +64,7 @@ public class UserLoginController {
   @RequestMapping("/regist")
   @ResponseBody
   public Map<String, Object> regist(HttpServletRequest req) {
-    Map<String, Object> res = new HashMap();
+    Map<String, Object> res = new HashMap<String, Object>();
     // 获取用户名
     String userName = req.getParameter(PARAMS_KEY.USER_NAME);
     // 验证用户名是否重复

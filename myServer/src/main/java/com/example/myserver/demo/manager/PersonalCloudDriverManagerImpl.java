@@ -28,7 +28,7 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
   @Override
   public List<CloudDriverFile> getFileList(User user, String rootRouter) {
     File fileRoot = new File(driverRouter + rootRouter);
-    List<CloudDriverFile> res = new ArrayList();
+    List<CloudDriverFile> res = new ArrayList<CloudDriverFile>();
     if (fileRoot.exists()) {
       File[] files = fileRoot.listFiles();
       for (int i = 0; i < files.length; i++) {
@@ -66,7 +66,7 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
     User cfgInfo = this.getUserDir(user);
     if (cfgInfo == null) {
       personalCloudDriverService.insertCfgInfo(user, dirName);
-      CommonResult res = this.createDir(user, "", dirName);
+      CommonResult<String> res = this.createDir(user, "", dirName);
       if (res.isSuccess()) {
         return dirName;
       } else {
@@ -80,7 +80,7 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
 
   @Override
   public CommonResult<String> createDir(User user, String rootDirName, String dirName) {
-    CommonResultBuilder<String> resultBuilder = new CommonResultBuilder();
+    CommonResultBuilder<String> resultBuilder = new CommonResultBuilder<String>();
     if (rootDirName != null && !rootDirName.isEmpty()) {
       User cfgInfo = this.getUserDir(user);
       if (rootDirName.indexOf("\\" + cfgInfo.getInfo().toString() + "\\") < 0) {
@@ -113,17 +113,18 @@ public class PersonalCloudDriverManagerImpl implements PersonalCloudDriverManage
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public String getFileSecret(HttpSession session, HttpServletRequest req) {
     String rootRouter = req.getParameter("rootRouter");
     List<CloudDriverFile> fileList = (List<CloudDriverFile>) session.getAttribute("fileList");
-    if(rootRouter!=null && fileList!=null &&fileList.size()>0){
-      for(int i = 0;i<fileList.size();i++){
-        if(fileList.get(i).getIndex() == rootRouter){
+    if (rootRouter != null && fileList != null && fileList.size() > 0) {
+      for (int i = 0; i < fileList.size(); i++) {
+        if (fileList.get(i).getIndex() == rootRouter) {
           return fileList.get(i).getRouter();
         }
       }
       return null;
-    }else{
+    } else {
       return null;
     }
   }

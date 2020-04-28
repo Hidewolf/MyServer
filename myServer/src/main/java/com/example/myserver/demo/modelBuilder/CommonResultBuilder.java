@@ -42,13 +42,13 @@ public class CommonResultBuilder<T> {
         return this.Success(null);
     }
 
-    public CommonResult<T> Success(T res) {
-        CommonResult<T> commonResult = new CommonResult();
-        commonResult.setResultCode(RES_ENUM.SUCCESS.code);
-        commonResult.setResultMsg(RES_ENUM.SUCCESS.msg);
-        commonResult.setRes(res);
-        return commonResult;
-    }
+  public CommonResult<T> Success(T res) {
+    CommonResult<T> commonResult = new CommonResult<T>();
+    commonResult.setResultCode(RES_ENUM.SUCCESS.code);
+    commonResult.setResultMsg(RES_ENUM.SUCCESS.msg);
+    commonResult.setRes(res);
+    return commonResult;
+  }
 
     public CommonResult<T> Error() {
         return this.Error(RES_ENUM.FAIL);

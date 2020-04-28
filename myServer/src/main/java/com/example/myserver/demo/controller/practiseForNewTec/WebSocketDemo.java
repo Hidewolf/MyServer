@@ -15,13 +15,13 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @ServerEndpoint("/webSocketTest/{page}")
 public class WebSocketDemo {
     //存放房间信息
-    static Map<String, Set<Session>> roomMap = new ConcurrentHashMap();
+    static Map<String, Set<Session>> roomMap = new ConcurrentHashMap<String, Set<Session>>();
 
     @OnOpen
     public void openSocket(@PathParam("page") String roomId, Session session) {
         Set<Session> room = roomMap.get(roomId);
         if (room == null) {
-            room = new CopyOnWriteArraySet();
+            room = new CopyOnWriteArraySet<Session>();
             room.add(session);
             roomMap.put(roomId, room);
         } else {

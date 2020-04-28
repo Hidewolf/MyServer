@@ -14,14 +14,16 @@ import java.util.List;
 @Configuration
 public class webAppConfig implements WebMvcConfigurer {
 
+    private final List<String> excludeResponse = new ArrayList<String>() {{
+        add("/login/log");
+    }};
     private final List<String> privateResponse = new ArrayList<String>() {{
-        add("/homeManager/**");
-        add("/privateCloudDriver/**");
+        add("/**");
     }};
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginCheckInterceptor()).addPathPatterns(privateResponse);
+        registry.addInterceptor(new LoginCheckInterceptor()).addPathPatterns(privateResponse).excludePathPatterns(excludeResponse);
     }
 
     //webSocket自动注册支持

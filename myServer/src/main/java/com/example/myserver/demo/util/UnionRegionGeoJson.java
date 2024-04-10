@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UnionRegionGeoJson {
-    public static void main(String[] args) throws IOException {
+    public static void test(String[] args) throws IOException {
         String jsonStr = getJsonStr("D:\\Ts\\Code\\myServerProject\\myServer\\src\\main\\resources\\Json\\geoJson.json");
 
         String regionListStr = getJsonStr("D:\\Ts\\Code\\myServerProject\\myServer\\src\\main\\resources\\Json\\cityList.json");
